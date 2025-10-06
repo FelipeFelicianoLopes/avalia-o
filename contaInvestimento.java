@@ -17,10 +17,11 @@ public class ContaInvestimento extends Conta {
     @Override
     public void mostrarDados() {
         super.mostrarDados();
-        System.out.println("Taxa de administração: " + taxaAdm + "%");
+        System.out.println("Taxa de administração: " + taxaAdm );
     }
 
 
 
 
 }
+
