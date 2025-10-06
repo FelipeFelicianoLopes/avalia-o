@@ -1,72 +1,77 @@
-import java.util.Scanner; import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Veiculo> lista = new ArrayList<>();//aqui to criando uma lista pra resceber todos os valores e listae posteriormente quando for exibir os status
+        boolean c = true;
 
-        boolean x = true;
-        while (x) {
-            System.out.print("Digite a opção desejada...\n[1] Moto\n[2] Carro\n[3] Caminhão\nOpção: ");
+        while (c) {
+
+            System.out.println("Escolha o tipo de conta:\n[1] Conta Corrente\n[2]Conta Poupanca\n[3]Conta Investimento\n[0]Encerrar ");
             int opcao = sc.nextInt();
             sc.nextLine();
 
-            System.out.print("Placa: ");
-            String placa = sc.nextLine();
-
-            System.out.print("Marca: ");
-            String marca = sc.nextLine();
-
-            System.out.print("Preço: ");
-            double preco = sc.nextDouble();
-            sc.nextLine();
-
-            switch (opcao) {//achei melhor pra colocar o case inves do if e else
+            switch (opcao) {
                 case 1:
-                    System.out.print("Cilindradas: ");
-                    int cilindradas = sc.nextInt();
-                    sc.nextLine();
-                    Veiculo moto = new Moto(placa, marca, preco, cilindradas);
-                    lista.add(moto);//adiciona a lista
+
+                    System.out.print("Número da conta: ");
+                    String numCorrente = sc.nextLine();
+                    System.out.print("Titular: ");
+                    String titCorrente = sc.nextLine();
+                    System.out.print("Saldo inicial: ");
+                    double saldoCorrente = sc.nextDouble();
+                    System.out.print("Limite do cheque especial: ");
+                    double limCorrente = sc.nextDouble();
+                    ContaCorrente contaCorrente = new ContaCorrente(numCorrente, titCorrente, saldoCorrente, limCorrente);
+                    contaCorrente.mostrarDados();
                     break;
 
                 case 2:
-                    System.out.print("Número de portas: ");
-                    int portas = sc.nextInt();
-                    sc.nextLine();
-                    Veiculo carro = new Carro(placa, marca, preco, portas);
-                    lista.add(carro);
+
+                    System.out.print("Número da conta: ");
+                    String numPoupanca = sc.nextLine();
+                    System.out.print("Titular: ");
+                    String titPoupanca = sc.nextLine();
+                    System.out.print("Saldo inicial: ");
+                    double saldoPoupanca = sc.nextDouble();
+                    System.out.print("Taxa de rendimento mensal: ");
+                    double taxaRendimentoPoupanca = sc.nextDouble();
+                    ContaPoupanca contaPoupanca = new ContaPoupanca(numPoupanca, titPoupanca, saldoPoupanca, taxaRendimentoPoupanca);
+                    contaPoupanca.mostrarDados();
                     break;
 
                 case 3:
-                    System.out.print("Capacidade de carga (toneladas): ");
-                    double carga = sc.nextDouble();
-                    sc.nextLine();
-                    Veiculo caminhao = new Caminhao(placa, marca, preco, carga);
-                    lista.add(caminhao);
+
+                    System.out.print("Número da conta: ");
+                    String nInvestimento = sc.nextLine();
+                    System.out.print("Titular: ");
+                    String tInvestimento = sc.nextLine();
+                    System.out.print("Saldo inicial: ");
+                    double saldoInvestimento = sc.nextDouble();
+                    System.out.print("Taxa de administração: ");
+                    double taxaAdministracao = sc.nextDouble();
+                    ContaInvestimento contaInvestimento = new ContaInvestimento(nInvestimento, tInvestimento, saldoInvestimento, taxaAdministracao);
+                    contaInvestimento.mostrarDados();
                     break;
+
+                case 0:
+                    c = false;
+                    System.out.println("Programa encerrado.");
+                    break;
+
             }
 
-            System.out.print("Deseja continuar ? (s/n): ");
-            String e = sc.nextLine();
-
-            if (e.equalsIgnoreCase("s")) {//equals ignore case  faz com que n importa se é maíusculo ou minúsculo
-                x = true;
-            }
-            else if (e.equalsIgnoreCase("n")) {
-                x = false;
-                break;
+            System.out.println("Deseja cadastrar outra conta? (s/n): ");
+            String resposta = sc.nextLine();
+            if (resposta.equalsIgnoreCase("n")) {
+                c = false;
+                System.out.println("Programa encerrado.");
             }
             else{
-                System.out.println("Inválido");
+                c = true;
             }
         }
 
-        for (Veiculo v : lista) {
-            v.exibir();
-        }
         sc.close();
-
     }
 }
